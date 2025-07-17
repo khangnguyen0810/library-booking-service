@@ -8,6 +8,8 @@ let currentBookingRoom = null;
 // Initialize the app when DOM is fully loaded
 document.addEventListener('DOMContentLoaded', async function () {
     try {
+        fetch('/api/ai/reset', { method: 'POST' });
+        console.log('Chat session reset on page load.');
         const res = await fetch('/api/rooms');
         const rooms = await res.json();
         console.log('Fetched rooms:', rooms);
@@ -23,6 +25,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         await setupEventListeners(rooms);
     } catch (error) {
         console.error('Failed to load rooms:', error);
+        console.error('Failed to reset chat session:', err);
     }
 });
 
