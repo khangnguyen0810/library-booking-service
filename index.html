@@ -1,279 +1,301 @@
-<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Library Room Booking</title>
-    <link rel="stylesheet" href="styles/style.css" />
-  </head>
-  <body>
-    <div class="container">
-      <div class="header">
-        <h1>📚 Library Room Booking</h1>
-        <p>Reserve your perfect study space</p>
-      </div>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Library Room Booking</title>
+		<link rel="stylesheet" href="styles/style.css" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<h1>📚 Library Room Booking</h1>
+				<p>Reserve your perfect study space</p>
+			</div>
 
-      <div class="search-section">
-        <form class="search-form" id="searchForm">
-          <div class="form-group">
-            <label for="date">Date</label>
-            <input type="date" id="date" name="date" required />
-          </div>
-          <div class="form-group">
-            <label for="time">Time</label>
-            <select id="time" name="time" required>
-              <option value="">Select time</option>
-              <option value="09:00">9:00 AM</option>
-              <option value="10:00">10:00 AM</option>
-              <option value="11:00">11:00 AM</option>
-              <option value="12:00">12:00 PM</option>
-              <option value="13:00">1:00 PM</option>
-              <option value="14:00">2:00 PM</option>
-              <option value="15:00">3:00 PM</option>
-              <option value="16:00">4:00 PM</option>
-              <option value="17:00">5:00 PM</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="capacity">Min Capacity</label>
-            <select id="capacity" name="capacity">
-              <option value="">Any size</option>
-              <option value="2">2+ people</option>
-              <option value="4">4+ people</option>
-              <option value="6">6+ people</option>
-              <option value="8">8+ people</option>
-            </select>
-          </div>
-          <button type="submit" class="search-btn">Search Rooms</button>
-        </form>
-      </div>
+			<div class="search-section">
+				<form class="search-form" id="searchForm">
+					<div class="form-group">
+						<label for="date">Date</label>
+						<input type="date" id="date" name="date" required />
+					</div>
+					<div class="form-group">
+						<label for="time">Time</label>
+						<select id="time" name="time" required>
+							<option value="">Select time</option>
+							<option value="09:00">9:00 AM</option>
+							<option value="10:00">10:00 AM</option>
+							<option value="11:00">11:00 AM</option>
+							<option value="12:00">12:00 PM</option>
+							<option value="13:00">1:00 PM</option>
+							<option value="14:00">2:00 PM</option>
+							<option value="15:00">3:00 PM</option>
+							<option value="16:00">4:00 PM</option>
+							<option value="17:00">5:00 PM</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="capacity">Min Capacity</label>
+						<select id="capacity" name="capacity">
+							<option value="">Any size</option>
+							<option value="2">2+ people</option>
+							<option value="4">4+ people</option>
+							<option value="6">6+ people</option>
+							<option value="8">8+ people</option>
+						</select>
+					</div>
+					<button type="submit" class="search-btn">
+						Search Rooms
+					</button>
+				</form>
+			</div>
 
-      <div class="rooms-grid" id="roomsGrid">
-        <!-- Rooms will be populated here -->
-      </div>
-    </div>
+			<div class="rooms-grid" id="roomsGrid">
+				<!-- Rooms will be populated here -->
+			</div>
+		</div>
 
-    <!-- Booking Modal -->
-    <div id="bookingModal" class="modal">
-      <div class="modal-content">
-        <button class="close-btn">&times;</button>
-        <div class="modal-header">
-          <h2>Book Room</h2>
-          <p id="modalRoomName">Study Room A</p>
-        </div>
-        <form class="booking-form" id="bookingForm">
-          <div class="form-group">
-            <label for="userName">Your Name</label>
-            <input type="text" id="userName" name="userName" required />
-          </div>
-          <div class="form-group">
-            <label for="userEmail">Email</label>
-            <input type="email" id="userEmail" name="userEmail" required />
-          </div>
-          <div class="form-group">
-            <label for="purpose">Purpose</label>
-            <select id="purpose" name="purpose" required>
-              <option value="">Select purpose</option>
-              <option value="study">Individual Study</option>
-              <option value="group">Group Study</option>
-              <option value="meeting">Meeting</option>
-              <option value="presentation">Presentation</option>
-              <option value="workshop">Workshop</option>
-            </select>
-          </div>
-          <button type="submit" class="confirm-btn">Confirm Booking</button>
-        </form>
-        <div id="successMessage" class="success-message" style="display: none">
-          Room booked successfully! You'll receive a confirmation email shortly.
-        </div>
-      </div>
-    </div>
-    <script type="module" src="scripts/script.js"></script>
-    <div class="chat-widget">
-      <div class="chat-window" id="chatWindow">
-        <div class="chat-header">
-          <h3>🤖 Library Assistant</h3>
-          <p>How can I help you today?</p>
-        </div>
-        <div class="chat-messages" id="chatMessages">
-          <div class="message bot">
-            Hello! I'm your library assistant. I can help you with room
-            bookings, answer questions about facilities, or provide information
-            about our services. How can I assist you today?
-          </div>
-        </div>
-        <div class="typing-indicator" id="typingIndicator">
-          <div class="typing-dots">
-            <div class="typing-dot"></div>
-            <div class="typing-dot"></div>
-            <div class="typing-dot"></div>
-          </div>
-        </div>
-        <div class="chat-input">
-          <div class="input-container">
-            <input
-              type="text"
-              id="messageInput"
-              placeholder="Type your message..."
-            />
-            <button class="send-btn" id="sendBtn">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <button class="chat-toggle" id="chatToggle">
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path
-            d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z"
-          />
-        </svg>
-      </button>
-    </div>
+		<!-- Booking Modal -->
+		<div id="bookingModal" class="modal">
+			<div class="modal-content">
+				<button class="close-btn">&times;</button>
+				<div class="modal-header">
+					<h2>Book Room</h2>
+					<p id="modalRoomName">Study Room A</p>
+				</div>
+				<form class="booking-form" id="bookingForm">
+					<div class="form-group">
+						<label for="userName">Your Name</label>
+						<input
+							type="text"
+							id="userName"
+							name="userName"
+							required
+						/>
+					</div>
+					<div class="form-group">
+						<label for="userEmail">Email</label>
+						<input
+							type="email"
+							id="userEmail"
+							name="userEmail"
+							required
+						/>
+					</div>
+					<div class="form-group">
+						<label for="purpose">Purpose</label>
+						<select id="purpose" name="purpose" required>
+							<option value="">Select purpose</option>
+							<option value="study">Individual Study</option>
+							<option value="group">Group Study</option>
+							<option value="meeting">Meeting</option>
+							<option value="presentation">Presentation</option>
+							<option value="workshop">Workshop</option>
+						</select>
+					</div>
+					<button type="submit" class="confirm-btn">
+						Confirm Booking
+					</button>
+				</form>
+				<div
+					id="successMessage"
+					class="success-message"
+					style="display: none"
+				>
+					Room booked successfully! You'll receive a confirmation
+					email shortly.
+				</div>
+			</div>
+		</div>
+		<script type="module" src="scripts/script.js"></script>
+		<div class="chat-widget">
+			<div class="chat-window" id="chatWindow">
+				<div class="chat-header">
+					<h3>🤖 Library Assistant</h3>
+					<p>How can I help you today?</p>
+				</div>
+				<div class="chat-messages" id="chatMessages">
+					<div class="message bot">
+						Hello! I'm your library assistant. I can help you with
+						room bookings, answer questions about facilities, or
+						provide information about our services. How can I assist
+						you today?
+					</div>
+				</div>
+				<div class="typing-indicator" id="typingIndicator">
+					<div class="typing-dots">
+						<div class="typing-dot"></div>
+						<div class="typing-dot"></div>
+						<div class="typing-dot"></div>
+					</div>
+				</div>
+				<div class="chat-input">
+					<div class="input-container">
+						<input
+							type="text"
+							id="messageInput"
+							placeholder="Type your message..."
+						/>
+						<button class="send-btn" id="sendBtn">
+							<svg
+								width="16"
+								height="16"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"
+								/>
+							</svg>
+						</button>
+					</div>
+				</div>
+			</div>
+			<button class="chat-toggle" id="chatToggle">
+				<svg
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+				>
+					<path
+						d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z"
+					/>
+				</svg>
+			</button>
+		</div>
 
-    <script>
-      // Chat widget functionality
-      const chatToggle = document.getElementById("chatToggle");
-      const chatWindow = document.getElementById("chatWindow");
-      const messageInput = document.getElementById("messageInput");
-      const sendBtn = document.getElementById("sendBtn");
-      const chatMessages = document.getElementById("chatMessages");
-      const typingIndicator = document.getElementById("typingIndicator");
+		<script>
+			// Chat widget functionality
+			const chatToggle = document.getElementById("chatToggle");
+			const chatWindow = document.getElementById("chatWindow");
+			const messageInput = document.getElementById("messageInput");
+			const sendBtn = document.getElementById("sendBtn");
+			const chatMessages = document.getElementById("chatMessages");
+			const typingIndicator = document.getElementById("typingIndicator");
 
-      let isChatOpen = false;
+			let isChatOpen = false;
 
-      // Toggle chat window
-      chatToggle.addEventListener("click", () => {
-        isChatOpen = !isChatOpen;
-        if (isChatOpen) {
-          chatWindow.style.display = "flex";
-          chatToggle.classList.add("active");
-          chatToggle.innerHTML = "×";
-          messageInput.focus();
-        } else {
-          chatWindow.style.display = "none";
-          chatToggle.classList.remove("active");
-          chatToggle.innerHTML =
-            '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z"/></svg>';
-        }
-      });
+			// Toggle chat window
+			chatToggle.addEventListener("click", () => {
+				isChatOpen = !isChatOpen;
+				if (isChatOpen) {
+					chatWindow.style.display = "flex";
+					chatToggle.classList.add("active");
+					chatToggle.innerHTML = "×";
+					messageInput.focus();
+				} else {
+					chatWindow.style.display = "none";
+					chatToggle.classList.remove("active");
+					chatToggle.innerHTML =
+						'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z"/></svg>';
+				}
+			});
 
-      // Send message function
-      function sendMessage() {
-        const message = messageInput.value.trim();
-        if (message) {
-          addMessage(message, "user");
-          messageInput.value = "";
+			// Send message function
+			function sendMessage() {
+				const message = messageInput.value.trim();
+				if (message) {
+					addMessage(message, "user");
+					messageInput.value = "";
 
-          // Show typing indicator
-          showTypingIndicator();
+					// Show typing indicator
+					showTypingIndicator();
 
-          // TODO: Call AI API here
-          // This is where you'll integrate your AI API
-          callAIAPI(message);
-        }
-      }
+					// TODO: Call AI API here
+					// This is where you'll integrate your AI API
+					callAIAPI(message);
+				}
+			}
 
-      // Add message to chat
-      function addMessage(text, sender) {
-        const messageDiv = document.createElement("div");
-        messageDiv.className = `message ${sender}`;
-        messageDiv.textContent = text;
-        chatMessages.appendChild(messageDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-      }
+			// Add message to chat
+			function addMessage(text, sender) {
+				const messageDiv = document.createElement("div");
+				messageDiv.className = `message ${sender}`;
+				messageDiv.textContent = text;
+				chatMessages.appendChild(messageDiv);
+				chatMessages.scrollTop = chatMessages.scrollHeight;
+			}
 
-      // Show typing indicator
-      function showTypingIndicator() {
-        typingIndicator.style.display = "block";
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-      }
+			// Show typing indicator
+			function showTypingIndicator() {
+				typingIndicator.style.display = "block";
+				chatMessages.scrollTop = chatMessages.scrollHeight;
+			}
 
-      // Hide typing indicator
-      function hideTypingIndicator() {
-        typingIndicator.style.display = "none";
-      }
+			// Hide typing indicator
+			function hideTypingIndicator() {
+				typingIndicator.style.display = "none";
+			}
 
-      // AI API call function - THIS IS WHERE YOU'LL ADD YOUR AI INTEGRATION
-      async function callAIAPI(userMessage) {
-        try {
-          showTypingIndicator();
+			async function callAIAPI(userMessage) {
+				try {
+					showTypingIndicator();
 
-          const response = await fetch("/api/ai", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              message: userMessage,
-            }),
-          });
+					const response = await fetch("/api/ai", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({
+							message: userMessage,
+						}),
+					});
 
-          const data = await response.json();
+					const data = await response.json();
 
-          hideTypingIndicator();
+					hideTypingIndicator();
 
-          if (data.success) {
-            addMessage(data.response, "bot");
-          } else {
-            addMessage("Sorry, I couldn't process your request.", "bot");
-          }
-        } catch (error) {
-          console.error("AI API Error:", error);
-          hideTypingIndicator();
-          addMessage(
-            "Sorry, I'm having trouble connecting right now. Please try again later.",
-            "bot"
-          );
-        }
-      }
+					if (data.success) {
+						addMessage(data.response, "bot");
+					} else {
+						addMessage(
+							"Sorry, I couldn't process your request.",
+							"bot",
+						);
+					}
+				} catch (error) {
+					console.error("AI API Error:", error);
+					hideTypingIndicator();
+					addMessage(
+						"Sorry, I'm having trouble connecting right now. Please try again later.",
+						"bot",
+					);
+				}
+			}
 
-      // Event listeners
-      sendBtn.addEventListener("click", sendMessage);
-      messageInput.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
-          sendMessage();
-        }
-      });
+			// Event listeners
+			sendBtn.addEventListener("click", sendMessage);
+			messageInput.addEventListener("keypress", (e) => {
+				if (e.key === "Enter") {
+					sendMessage();
+				}
+			});
 
-      // Basic booking modal functionality (from your original code)
-      const bookBtns = document.querySelectorAll(".book-btn");
-      const bookingModal = document.getElementById("bookingModal");
-      const closeBtn = document.querySelector(".close-btn");
+			const bookBtns = document.querySelectorAll(".book-btn");
+			const bookingModal = document.getElementById("bookingModal");
+			const closeBtn = document.querySelector(".close-btn");
 
-      bookBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          if (!btn.disabled) {
-            bookingModal.style.display = "block";
-          }
-        });
-      });
+			bookBtns.forEach((btn) => {
+				btn.addEventListener("click", () => {
+					if (!btn.disabled) {
+						bookingModal.style.display = "block";
+					}
+				});
+			});
 
-      closeBtn.addEventListener("click", () => {
-        bookingModal.style.display = "none";
-      });
+			closeBtn.addEventListener("click", () => {
+				bookingModal.style.display = "none";
+			});
 
-      window.addEventListener("click", (e) => {
-        if (e.target === bookingModal) {
-          bookingModal.style.display = "none";
-        }
-      });
-    </script>
-  </body>
+			window.addEventListener("click", (e) => {
+				if (e.target === bookingModal) {
+					bookingModal.style.display = "none";
+				}
+			});
+		</script>
+	</body>
 </html>
