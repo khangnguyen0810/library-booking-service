@@ -52,7 +52,6 @@ The project creates a seamless bridge between a user's intent and the physical d
    ```env
    MONGO_URI=your_mongodb_uri
    GEMINI_API_KEY=your_api_key
-   PORT=3000
    ```
 4. **Run the server:**
    ```bash
